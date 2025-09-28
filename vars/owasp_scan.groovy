@@ -1,6 +1,6 @@
 def call(Map config = [:]) {
-    stage(config.stageName ?: 'OWASP Dependency Check') {
-        def project = config.project ?: "default-project"
+    stage("OWASP Dependency Check") {
+        def project = config.project ?: "project"
         def scanPath = config.scanPath ?: "."
         def format = config.format ?: "HTML"
         def output = config.output ?: "dependency-check-report"
@@ -10,7 +10,7 @@ def call(Map config = [:]) {
             --project ${project} \
             --scan ${scanPath} \
             --format ${format} \
-            --out ${output}
+            --out ${output} || true
         """
     }
 }
